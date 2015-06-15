@@ -221,7 +221,7 @@ $app->get('/qa', function() use($app) {
 			  $words= implode(',', array_keys($wordCountArr));
 			  $words = str_replace(',', '_', $words);
 			  
-			  echo "key words:".$words;
+			  echo "key words:".$words.". Search in AYLIEN\TextAPI will be done by this Topic";
 			  echo "<br>";
 
 			// here calling the AYLIEN\TextAPI with appid and key.
