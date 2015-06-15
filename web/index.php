@@ -166,6 +166,10 @@ $app->get('/qa', function() use($app) {
 			echo $result;
 		//$json = json_decode($result, true);
 			
+			echo "<br>";
+			echo "<br>";
+			echo "Result from Wiki:"
+			echo "<br>";
 			
 			$string=$q;
 		
@@ -200,18 +204,18 @@ $app->get('/qa', function() use($app) {
 				  }
 			  }
 			  $words= implode(',', array_keys($wordCountArr));
-			  $words = str_replace(',', ' ', $words);
+			  $words = str_replace(',', '%20', $words);
 
 			  //return $words;
 			
-			  $textapi = new AYLIEN\TextAPI("76ceedda", "ff7b37e96e63aa6d0a97a6465c949c52");
-			$url='https://en.wikipedia.org/wiki/'."Putin";
+			  $textapi = new AYLIEN\TextAPI("098443aa", "e288284a802322d954b42740d0dfa95b");
+			$url='https://en.wikipedia.org/wiki/'.$words;
 			//echo $url;
 			$summary= $textapi->summarize(array("url" => $url));
 			//echo $summary->sentences[0].$summary->sentences[1].$summary->sentences[2];
 			$ans="";
 			if($summary->text == null) {
-				$ans="Your majesty! Jon Snow knows nothing! So do I! Your grace, I searched a lot. But could not find a good free API. But I can manage Aylien API. By which I can show you information from Wiki Page. You can write only the topic name and information from the wiki page will be appeared. Enjoy, Kitty!";
+				$ans="Your majesty! Jon Snow knows nothing! So do I!.Result Also can't be found at AYLIEN\TextAPI. Sorry Kitty!!!";
 			}else{
 				$ans=$summary->text;
 			}
