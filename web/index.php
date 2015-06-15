@@ -54,7 +54,8 @@ $app->get('/greetings', function() use($app) {
 $app->get('/qa', function() use($app) {
   $app['monolog']->addDebug('logging output.');
 
-	return "abc";
+	$response = file_get_contents('http://api.openweathermap.org/data/2.5/weather?q=Khulna');
+	return $response;
 
 });
 
