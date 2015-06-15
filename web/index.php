@@ -199,7 +199,7 @@ $app->get('/qa', function() use($app) {
 			  $words= implode(',', array_keys($wordCountArr));
 			  $words = str_replace(',', ' ', $words);
 
-			  return $words;
+			  //return $words;
 			
 			  $textapi = new AYLIEN\TextAPI("098443aa", "e288284a802322d954b42740d0dfa95b");
 			  $url='https://en.wikipedia.org/wiki/'.$words;
