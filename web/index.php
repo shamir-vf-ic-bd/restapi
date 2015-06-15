@@ -146,7 +146,7 @@ $app->get('/qa', function() use($app) {
 
 			//set the url, number of POST vars, POST data
 			//$ch,curlopt_returntransfer,true
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+			//curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 			
 			curl_setopt($ch,CURLOPT_URL, $url);
 			curl_setopt($ch,CURLOPT_POST, count($data));
@@ -155,6 +155,21 @@ $app->get('/qa', function() use($app) {
 			//execute post
 			$result = curl_exec($ch);
 	
+			
+			
+	/*		$ch = curl_init();
+
+			//set the url, number of POST vars, POST data
+			//$ch,curlopt_returntransfer,true
+			curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+			
+			curl_setopt($ch,CURLOPT_URL, $url);
+			curl_setopt($ch,CURLOPT_POST, count($data));
+			curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+			//execute post
+			$result = curl_exec($ch);
+	*/
 		
 		//$json = json_decode($result, true);
 		if(!$result || strlen(trim($result)) == 0)
