@@ -55,15 +55,24 @@ $app->get('/greetings', function() use($app) {
 $app->get('/weather', function() use($app) {
   $app['monolog']->addDebug('logging output.');
 
+	/* Here First I am retrieving data from the API
+		
+		Then Checking whether the question contains word temperature,humidity,rain,clouds or Clear
+		
+		If the question contains one of these words then return appropiate result
+		
+		otherwise return "not found"	
+	
+	*/
+	
 	$q=$_GET['q'];
   
 	$arr = explode('<', $q);
 	if(isset($arr[1]))
 	{	
 		$arr1 = explode('>', $arr[1]);
-		//echo $arr1[0];
 	}
-	else return "Please Insert queston in appropiate form. Give city name inside < >. Sample question: What is today's humidity in \<Dhaka\>?";
+	else return "Please Insert queston in appropiate form. Give city name inside < >. Sample question: What is today's humidity in <Dhaka>?";
 	
 	$temp="not found";
 	$humidity="not found";
@@ -126,12 +135,21 @@ $app->get('/weather', function() use($app) {
 $app->get('/qa', function() use($app) {
   $app['monolog']->addDebug('logging output.');
   
-  $q=$_GET['q'];
+			$q=$_GET['q'];
+			
+			
+			/*
+				Here first trying to get data from DBpedia
+			
+			*/
   
-  $spar=file_get_contents("http://quepy.machinalis.com/engine/get_query?question=".urlencode($q));
-		$decode_spar=json_decode($spar,false);
+			// here getting the SPARQL query
+			$spar=file_get_contents("http://quepy.machinalis.com/engine/get_query?question=".urlencode($q));  
+ 			$decode_spar=json_decode($spar,false);
 		
-		 $data= array(
+		
+			//here getting DBpedia response
+			$data= array(
                 'debug'=> 'on',
                 'timeout'=> '3000',
                 'query'=> urlencode($decode_spar->queries[0]->query),
@@ -142,22 +160,14 @@ $app->get('/qa', function() use($app) {
 			$fields_string='';
 			foreach($data as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
 					rtrim($fields_string, '&');
-			//$context = stream_context_create (array ( 'http' => $data ));
-			
-	
-			
 			
 			$ch = curl_init();
-
-			//set the url, number of POST vars, POST data
-			//$ch,curlopt_returntransfer,true
 			curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 			
 			curl_setopt($ch,CURLOPT_URL, $url);
 			curl_setopt($ch,CURLOPT_POST, count($data));
 			curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
 
-			//execute post
 			$result = curl_exec($ch);
 		
 			echo "result found from: DBpedia.";
@@ -165,12 +175,16 @@ $app->get('/qa', function() use($app) {
 			
 			if(strlen(trim($result))<300) echo "Result Not Found.";
 			else echo $result;
-		//$json = json_decode($result, true);
 			
 			echo "<br>";
 			echo "<br>";
 			echo "Result from Wiki:";
 			echo "<br>";
+			
+			// here getting result from wiki using AYLIEN\TextAPI
+			
+			
+			// frist try to find the keywords from the question ignoring the whitespaces,articles,preposition etc. 
 			
 			$string=$q;
 		
@@ -210,29 +224,27 @@ $app->get('/qa', function() use($app) {
 			  echo "key words:".$words;
 			  echo "<br>";
 
-			  //return $words;
+			// here calling the AYLIEN\TextAPI with appid and key.
 			
 			  $textapi = new AYLIEN\TextAPI("098443aa", "e288284a802322d954b42740d0dfa95b");
-			$url='https://en.wikipedia.org/wiki/'."CEO_Google";
-			//echo $url;
-			$summary= $textapi->summarize(array("url" => $url));
-			//echo $summary->sentences[0].$summary->sentences[1].$summary->sentences[2];
-			$ans="";
-			if($summary->text == null) {
-				$ans="Your majesty! Jon Snow knows nothing! So do I!.Result Also can't be found at AYLIEN\TextAPI. Sorry Kitty!!!";
-			}else{
-				$ans=$summary->text;
-			}
+			  $url='https://en.wikipedia.org/wiki/'.$words;
+			  $summary= $textapi->summarize(array("url" => $url));
+			  $ans="";
+			  if($summary->text == null) {
+				   $ans="Your majesty! Jon Snow knows nothing! So do I!.Result Also can't be found at AYLIEN\TextAPI. Sorry Kitty!!!";
+			  }else{
+				   $ans=$summary->text;
+			  }
 
 		
 		
-		$myarr = array(
-			'answer'  => $ans
-		);
-  
-		$js=json_encode($myarr);
-  
-		return $js;
+			$myarr = array(
+				'answer'  => $ans
+			);
+	  
+			$js=json_encode($myarr);
+	  
+			return $js;
 
 });
   
