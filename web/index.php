@@ -168,7 +168,7 @@ $app->get('/qa', function() use($app) {
 			
 			echo "<br>";
 			echo "<br>";
-			echo "Result from Wiki:"
+			echo "Result from Wiki:";
 			echo "<br>";
 			
 			$string=$q;
