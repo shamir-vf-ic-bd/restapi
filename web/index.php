@@ -15,7 +15,8 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 $app->get('/greetings', function() use($app) {
   $app['monolog']->addDebug('logging output.');
   
-  return "shamir Ahmed Shohan 253";
+  $q=$_GET['q'];
+  return $q."moja";
   
 });
 
