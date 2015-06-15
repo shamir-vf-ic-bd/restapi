@@ -17,6 +17,8 @@ $app->get('/greetings', function() use($app) {
   
   $q=$_GET['q'];
   $arr = explode('!', $q);
+  echo $q;
+  
   $ans="";
   if($arr[0]=="Hi")
   {
@@ -24,6 +26,7 @@ $app->get('/greetings', function() use($app) {
   }
   else if($arr[0]=="Hello")
   {
+	echo "mmm";
 	$ans="My name is Shamir.";
   }
   else if($arr[0]=="Good morning" || $arr[0]=="Good evening" || arr[0]=="Good night")
