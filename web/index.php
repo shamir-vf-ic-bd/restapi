@@ -155,9 +155,9 @@ $app->get('/qa', function() use($app) {
 			//execute post
 			$result = curl_exec($ch);
 	
-		$json = json_decode($result, true);
+		//$json = json_decode($result, true);
 
-		return $json;
+		return $result;
 
 });
   
