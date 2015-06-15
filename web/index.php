@@ -122,7 +122,41 @@ $app->get('/weather', function() use($app) {
 });
 
 
+$app->get('/qa', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+  
+  $q=$_GET['q'];
+  
+  $spar=file_get_contents("http://quepy.machinalis.com/engine/get_query?question=".urlencode($q)."?");
+		$decode_spar=json_decode($spar,false);
+		
+		 $data= array(
+                'debug'=> 'on',
+                'timeout'=> '3000',
+                'query'=> urlencode($decode_spar->queries[0]->query),
+                'default-graph-uri'=> 'http://dbpedia.org',
+                'format'=> 'application/sparql-results+json'
+            );
+			$url='http://dbpedia.org/sparql/';
+			$fields_string='';
+			foreach($data as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+					rtrim($fields_string, '&');
+			//$context = stream_context_create (array ( 'http' => $data ));
+			$ch = curl_init();
 
+			//set the url, number of POST vars, POST data
+			curl_setopt($ch,CURLOPT_URL, $url);
+			curl_setopt($ch,CURLOPT_POST, count($data));
+			curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+			//execute post
+			$result = curl_exec($ch);
+			
+		return $result;
+
+));
+  
+  
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
   'twig.path' => __DIR__.'/../views',
