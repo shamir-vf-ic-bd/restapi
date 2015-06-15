@@ -51,7 +51,7 @@ $app->get('/greetings', function() use($app) {
 
 
 
-$app->get('/qa', function() use($app) {
+$app->get('/weather', function() use($app) {
   $app['monolog']->addDebug('logging output.');
 
 	$q=$_GET['q'];
