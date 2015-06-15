@@ -72,7 +72,7 @@ $app->get('/weather', function() use($app) {
 	{	
 		$arr1 = explode('>', $arr[1]);
 	}
-	else return "Please Insert queston in appropiate form. Give city name inside < >. Sample question: What is today's humidity in <Dhaka>?";
+	else return "Please Insert queston in appropiate form. Give city name inside < >. Sample question: What is today's humidity in ".htmlspecialchars("<Dhaka>")."?";
 	
 	$temp="not found";
 	$humidity="not found";
@@ -222,6 +222,7 @@ $app->get('/qa', function() use($app) {
 			  $words = str_replace(',', '_', $words);
 			  
 			  echo "key words:".$words.". Search in AYLIEN\TextAPI will be done by this Topic";
+			  echo "<br>";
 			  echo "<br>";
 
 			// here calling the AYLIEN\TextAPI with appid and key.
