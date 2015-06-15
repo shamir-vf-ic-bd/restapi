@@ -155,8 +155,12 @@ $app->get('/qa', function() use($app) {
 			//execute post
 			$result = curl_exec($ch);
 	
+		
 		//$json = json_decode($result, true);
-		if(empty($result)) return "abc";
+		if(!$result || strlen(trim($result)) == 0)
+		{
+			return 'Empty Result';
+		}
 
 		return $result;
 
