@@ -27,13 +27,13 @@ $app->get('/greetings', function() use($app) {
   {
 	$ans="My name is Shamir.";
   }
-  else if($arr[0]=="Good morning" || $arr[0]=="Good evening" || arr[0]=="Good night")
+  else if($arr[0]=="Good morning" || $arr[0]=="Good evening" || $arr[0]=="Good night")
   {
 	$ans=$arr[0]."!I am Shamir! I am also pleased to meet you!";
   }
   else
   {
-	$ans="Sorry, I don't understand your question."
+	$ans="Sorry, I don't understand your question.";
   }
   
   $ans="Hello, Kitty!".$ans;
@@ -42,8 +42,9 @@ $app->get('/greetings', function() use($app) {
   'answer'  => $ans
   );
   
+  $js=json_encode($myarr);
   
-  return json_encode($myarr);
+  return $js;
   
 });
 
