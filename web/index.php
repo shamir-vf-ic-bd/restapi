@@ -1,6 +1,7 @@
 <?php
 
 require('../vendor/autoload.php');
+header("Content-Type:application/json");
 
 $app = new Silex\Application();
 $app['debug'] = true;
