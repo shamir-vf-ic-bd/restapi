@@ -205,7 +205,7 @@ $app->get('/qa', function() use($app) {
 			  //return $words;
 			
 			  $textapi = new AYLIEN\TextAPI("76ceedda", "ff7b37e96e63aa6d0a97a6465c949c52");
-			$url='https://en.wikipedia.org/wiki/'.$words;
+			$url='https://en.wikipedia.org/wiki/'."Putin";
 			//echo $url;
 			$summary= $textapi->summarize(array("url" => $url));
 			//echo $summary->sentences[0].$summary->sentences[1].$summary->sentences[2];
