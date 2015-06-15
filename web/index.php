@@ -207,9 +207,12 @@ $app->get('/qa', function() use($app) {
 			  $ans="";
 			  if($summary->text == null) 
 			  {
+				  return "mm";
+					
 				  $ans="Your majesty! Jon Snow knows nothing! So do I! Your grace, I searched a lot. But could not find a good free API. But I can manage Aylien API. By which I can show you information from Wiki Page. You can write only the topic name and information from the wiki page will be appeared. Enjoy, Kitty!";
 			  }else
 			  {
+				  return "adjad";
 				  $ans=$summary->text;
 			  }
 
