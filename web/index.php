@@ -48,6 +48,19 @@ $app->get('/greetings', function() use($app) {
   
 });
 
+
+
+
+$app->get('/qa', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+	return "abc";
+
+});
+
+
+
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
   'twig.path' => __DIR__.'/../views',
 ));
