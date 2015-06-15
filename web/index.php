@@ -160,9 +160,11 @@ $app->get('/qa', function() use($app) {
 			//execute post
 			$result = curl_exec($ch);
 		
+			echo "result found from: DBpedia.";
+			echo "<br>";
+			
+			echo $result;
 		//$json = json_decode($result, true);
-		if(strlen(trim($result))<=290)
-		{
 			
 			
 			$string=$q;
@@ -214,8 +216,7 @@ $app->get('/qa', function() use($app) {
 				$ans=$summary->text;
 			}
 
-		}
-		else $ans=trim($result);
+		
 		
 		$myarr = array(
 			'answer'  => $ans
