@@ -127,7 +127,7 @@ $app->get('/qa', function() use($app) {
   
   $q=$_GET['q'];
   
-  $spar=file_get_contents("http://quepy.machinalis.com/engine/get_query?question=".urlencode($q)."?");
+  $spar=file_get_contents("http://quepy.machinalis.com/engine/get_query?question=".urlencode($q));
 		$decode_spar=json_decode($spar,false);
 		
 		 $data= array(
@@ -154,8 +154,10 @@ $app->get('/qa', function() use($app) {
 
 			//execute post
 			$result = curl_exec($ch);
-			
-		return $result;
+	
+		$json = json_decode($result, true);
+
+		return $json;
 
 });
   
