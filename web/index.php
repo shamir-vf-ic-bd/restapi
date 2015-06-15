@@ -163,7 +163,8 @@ $app->get('/qa', function() use($app) {
 			echo "result found from: DBpedia.";
 			echo "<br>";
 			
-			echo $result;
+			if(strlen(trim($result))<300) echo "Result Not Found.";
+			else echo $result;
 		//$json = json_decode($result, true);
 			
 			echo "<br>";
@@ -205,11 +206,14 @@ $app->get('/qa', function() use($app) {
 			  }
 			  $words= implode(',', array_keys($wordCountArr));
 			  $words = str_replace(',', '_', $words);
+			  
+			  echo "key words:".$words;
+			  echo "<br>";
 
 			  //return $words;
 			
 			  $textapi = new AYLIEN\TextAPI("098443aa", "e288284a802322d954b42740d0dfa95b");
-			$url='https://en.wikipedia.org/wiki/'.$words;
+			$url='https://en.wikipedia.org/wiki/'."CEO_Google";
 			//echo $url;
 			$summary= $textapi->summarize(array("url" => $url));
 			//echo $summary->sentences[0].$summary->sentences[1].$summary->sentences[2];
