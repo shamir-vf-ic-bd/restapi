@@ -162,6 +162,7 @@ $app->get('/qa', function() use($app) {
 		//$json = json_decode($result, true);
 		if(strlen(trim($result))<=290)
 		{
+			return "abc";
 			
 			$string=$q;
 		
