@@ -204,7 +204,7 @@ $app->get('/qa', function() use($app) {
 				  }
 			  }
 			  $words= implode(',', array_keys($wordCountArr));
-			  $words = str_replace(',', '%20', $words);
+			  $words = str_replace(',', '_', $words);
 
 			  //return $words;
 			
