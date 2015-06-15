@@ -134,7 +134,7 @@ $app->get('/qa', function() use($app) {
                 'debug'=> 'on',
                 'timeout'=> '3000',
                 'query'=> urlencode($decode_spar->queries[0]->query),
-                'default-graph-uri'=> 'http://dbpedia.org',
+                'default-graph-uri'=> '',
                 'format'=> 'application/sparql-results+json'
             );
 			$url='http://dbpedia.org/sparql/';
