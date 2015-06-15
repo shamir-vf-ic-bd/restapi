@@ -62,7 +62,7 @@ $app->get('/qa', function() use($app) {
 		$arr1 = explode('>', $arr[1]);
 		echo $arr1[0];
 	}
-	else return "Please Insert queston in appropiate form. Give city name inside <>. Sample question: What is today's humidity in <City Name>?"
+	else return "Please Insert queston in appropiate form. Give city name inside <>. Sample question: What is today's humidity in <City Name>?";
 	
 	$temp="not found";
 	$humidity="not found";
@@ -108,7 +108,7 @@ $app->get('/qa', function() use($app) {
 	else if(strpos($q,'Rain') !== false || strpos($q,'rain') !== false) $ans=$rain;
 	else if(strpos($q,'Clouds') !== false || strpos($q,'clouds') !== false) $ans=$cloud;
 	else if(strpos($q,'Clear') !== false || strpos($q,'clear') !== false) $ans=$clear;
-	else $ans="Don't know."
+	else $ans="Don't know.";
 	
 	
 	$myarr = array(
