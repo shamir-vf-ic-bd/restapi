@@ -154,7 +154,7 @@ $app->get('/qa', function() use($app) {
 			
 		return $result;
 
-));
+});
   
   
 
