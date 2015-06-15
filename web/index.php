@@ -156,7 +156,7 @@ $app->get('/qa', function() use($app) {
 			$result = curl_exec($ch);
 	
 		//$json = json_decode($result, true);
-		if($result=="" || $result==null) return "abc";
+		if(empty($result)) return "abc";
 
 		return $result;
 
